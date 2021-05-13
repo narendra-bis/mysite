@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+
+{% block javascript %}
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		$("#id_username").change(function(){
+			var username = $(this).val();
+			// debugger;
+			// alert("hello "+username);
+			$.ajax({
+				type : 'GET',
+				url :'{% url "console:validate_username" %}',
+				data : {
+					'username':username
+				},
+				dataType :'json',
+				success : function(data){
+					if(data.is_taken){
+					alert('A user with this username already exists.');
+
+					}
+				}
+
+			});
+
+		});
+	});
+	
+</script>
+{% endblock %}
+
+{% block contents %}
+<form method="POST">
+
+	{% csrf_token %}
+	{{form.as_p}}
+	<button type="submit">Submit</button>	
+</form>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block contents %}
+<form method="POST">
+	{% csrf_token %}
+	Enter the first number = <input type="text" name="inputa" required="True"> <br><br>
+	Enter the second number = <input type="text" name="inputb" required="True">
+<br>
+<button type="submit" name="addn">Add</button> <button type="submit" name="subn">Subtract</button>
+</form>
+
+{% if addn %}
+<h2>Addition is {{ addn }}</h2>
+{% elif subn %}
+<h2>Subtraction is {{ subn }}</h2>
+{% endif %}
+{% endblock %}
